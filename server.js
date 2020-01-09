@@ -15,7 +15,7 @@ app.use(logger('dev'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-mongoose.connect('mongodb://localhost/scrapeHW', {
+mongoose.connect(process.env.MONGODB_URI||'mongodb://localhost/scrapeHW', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
