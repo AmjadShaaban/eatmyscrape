@@ -10,6 +10,8 @@ const cors = require('cors');
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(cors());
+}else{
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 app.use(logger('dev'));
 
@@ -19,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI||'mongodb://localhost/scrapeHW', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
+app.get('/', (req, res) => {    res.sendfile(path.join(__dirname = 'client/build/index.html'));  })
 app.get('/scrape', (req, res) => {
   axios.get('https://news.ycombinator.com/').then(response => {
     let $ = cheerio.load(response.data);
